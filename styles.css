@@ -11,7 +11,7 @@
   --success: #10b981;
   --danger: #ef4444;
   --warning: #f59e0b;
-  --sidebar-width: 240px;
+  --sidebar-width: 200px;
   --blur-amount: blur(20px);
   --blur-sidebar: blur(40px);
 }
@@ -312,6 +312,7 @@ a:hover {
 /* Sidebar */
 .sidebar {
   width: var(--sidebar-width);
+  min-width: var(--sidebar-width);
   background: var(--glass);
   backdrop-filter: var(--blur-sidebar);
   border-radius: 0 32px 32px 0;
@@ -515,9 +516,19 @@ a:hover {
 }
 
 /* Info Boxes */
+.home-boxes {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+  max-width: 900px;
+}
+
 .info-box {
   width: 100%;
-  max-width: 560px;
+  max-width: 420px;
+  flex: 1;
   background: var(--glass);
   backdrop-filter: var(--blur-amount);
   border: 1px solid var(--glass-border);
