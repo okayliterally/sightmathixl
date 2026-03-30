@@ -414,7 +414,32 @@ function initSettings() {
     }
   };
 
-  $('panicBtn').onclick = triggerPanic;
+  $('panicBtn').onclick = () => {
+    const overlay = document.createElement('div');
+    overlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.7);display:flex;align-items:center;justify-content:center;z-index:10000;font-family:Inter,sans-serif;';
+    const box = document.createElement('div');
+    box.style.cssText = 'background:var(--glass);border:1px solid var(--glass-border);border-radius:16px;padding:28px;text-align:center;';
+    const msg = document.createElement('p');
+    msg.style.cssText = 'color:var(--fg);font-size:14px;margin-bottom:8px;';
+    msg.textContent = 'Press any key to set as panic key';
+    const sub = document.createElement('p');
+    sub.style.cssText = 'color:var(--muted);font-size:11px;';
+    sub.textContent = 'Press ESC to cancel';
+    box.appendChild(msg);
+    box.appendChild(sub);
+    overlay.appendChild(box);
+    document.body.appendChild(overlay);
+    const handler = (e) => {
+      e.preventDefault();
+      document.removeEventListener('keydown', handler);
+      document.body.removeChild(overlay);
+      if (e.key === 'Escape') return;
+      panicKey = e.key.toUpperCase();
+      store.set('panicKey', panicKey);
+      $('panicKeyDisplay').textContent = panicKey;
+    };
+    document.addEventListener('keydown', handler);
+  };
 
   // Modals
   $('embedClose').onclick = () => $('embedModal').classList.remove('active');
@@ -598,13 +623,13 @@ function initNav() {
   }
 }
 
+let panicKey = (store.get('panicKey') || 'P').toUpperCase();
+$('panicKeyDisplay').textContent = panicKey;
+
 function initKeys() {
   document.onkeydown = (e) => {
     if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
-    if (e.key.toLowerCase() === 'a') $('gamesLink').click();
-    if (e.key.toLowerCase() === 'm') $('moviesLink').click();
-    if (e.key.toLowerCase() === 'h') $('homeLink').click();
-    if (e.key.toLowerCase() === 'p') triggerPanic();
+    if (e.key.toUpperCase() === panicKey) triggerPanic();
   };
 }
 
