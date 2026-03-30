@@ -6,7 +6,6 @@ const store = {
   set: (key, val) => { try { localStorage.setItem(key, val); } catch(e) {} }
 };
 
-// Games - copy paste from games.json
 const gamesData = [
   { "name": "1v1lol", "image": "logo.png", "url": "1v1lol" },
   { "name": "1v1space", "image": "splash.png", "url": "1v1space" },
@@ -305,7 +304,6 @@ const gamesData = [
 
 const GAME_BASE = 'https://gms.parcoil.com';
 
-// Cloak config
 const cloakConfig = {
   default: { title: 'sight.w', favicon: 'https://image2url.com/r2/default/images/1772114193046-733bfa71-77a7-4fdc-bce4-d3e8ebe17a29.png' },
   canvas: { title: 'Canvas LMS', favicon: 'https://canvas.instructure.com/favicon.ico' },
@@ -315,7 +313,6 @@ const cloakConfig = {
 
 let currentGameUrl = '';
 
-// Init
 document.addEventListener('DOMContentLoaded', () => {
   initTheme();
   initCloak();
@@ -324,6 +321,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initNav();
   initKeys();
   initStats();
+  initPointerLock();
   updateTime();
   setInterval(updateTime, 1000);
   setTimeout(() => $('loadingScreen').classList.add('hidden'), 1200);
@@ -351,8 +349,8 @@ function initCloak() {
   applyCloak(cloak);
   $all('.cloak-btn').forEach(btn => {
     btn.addEventListener('click', () => {
-      applyCloak(btn.dataset.cloak);
       store.set('cloak', btn.dataset.cloak);
+      applyCloak(btn.dataset.cloak);
       $all('.cloak-btn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
     });
@@ -361,11 +359,16 @@ function initCloak() {
 
 function applyCloak(cloak) {
   const c = cloakConfig[cloak];
-  if (c) {
-    document.title = c.title;
+  if (!c) return;
+  document.title = c.title;
+  const existing = document.getElementById('favicon');
+  if (existing) {
+    existing.href = c.favicon;
+  } else {
     const link = document.createElement('link');
     link.id = 'favicon';
     link.rel = 'icon';
+    link.type = 'image/png';
     link.href = c.favicon;
     document.head.appendChild(link);
   }
@@ -467,11 +470,15 @@ function initGames() {
 
   $('gamePlayerBack').onclick = () => {
     $('gamePlayerView').classList.remove('active');
-    $('secondGamesContainer').style.display = 'block';
     $('gamePlayerIframe').src = '';
+    $('secondGamesContainer').style.display = 'block';
   };
 
-  $('gamePlayerReload').onclick = () => $('gamePlayerIframe').src = $('gamePlayerIframe').src;
+  $('gamePlayerReload').onclick = () => {
+    const src = $('gamePlayerIframe').src;
+    $('gamePlayerIframe').src = '';
+    $('gamePlayerIframe').src = src;
+  };
 
   $('gamePlayerEmbed').onclick = () => {
     $('embedModal').classList.add('active');
@@ -483,6 +490,8 @@ function initGames() {
   $('gamesBack').onclick = () => {
     $('gamesIframeContainer').style.display = 'none';
     $('secondGamesContainer').style.display = 'none';
+    $('gamePlayerView').classList.remove('active');
+    $('gamePlayerIframe').src = '';
     $('gamesHeader').style.display = 'none';
     $('gamesMenu').style.display = 'flex';
     $('gamesBack').style.display = 'none';
@@ -490,7 +499,11 @@ function initGames() {
     $('gamesIframe').src = '';
   };
 
-  $('gamesReload').onclick = () => $('gamesIframe').src = $('gamesIframe').src;
+  $('gamesReload').onclick = () => {
+    const src = $('gamesIframe').src;
+    $('gamesIframe').src = '';
+    $('gamesIframe').src = src;
+  };
 }
 
 function renderGames() {
@@ -523,8 +536,10 @@ function initNav() {
     $('settingsPage').classList.remove('active');
     $all('.nav-link').forEach(l => l.classList.remove('active'));
 
-    if (page === 'home') { $('homePage').style.display = 'flex'; $('homeLink').classList.add('active'); }
-    else if (page === 'games') {
+    if (page === 'home') {
+      $('homePage').style.display = 'flex';
+      $('homeLink').classList.add('active');
+    } else if (page === 'games') {
       $('gamesPage').classList.add('active');
       $('gamesLink').classList.add('active');
       $('gamesMenu').style.display = 'flex';
@@ -532,12 +547,21 @@ function initNav() {
       $('gamesIframeContainer').style.display = 'none';
       $('secondGamesContainer').style.display = 'none';
       $('gamePlayerView').classList.remove('active');
-      
+      $('gamesIframe').src = '';
+      $('gamePlayerIframe').src = '';
+    } else if (page === 'movies') {
+      $('moviesPage').classList.add('active');
+      $('moviesLink').classList.add('active');
+      $('moviesIframe').src = 'https://www.fmovies.gd/home';
+    } else if (page === 'chat') {
+      $('chatPage').classList.add('active');
+      $('chatLink').classList.add('active');
+    } else if (page === 'partners') {
+      $('partnersPage').classList.add('active');
+      $('partnersLink').classList.add('active');
+    } else if (page === 'settings') {
+      $('settingsPage').classList.add('active');
     }
-    else if (page === 'movies') { $('moviesPage').classList.add('active'); $('moviesLink').classList.add('active'); $('moviesIframe').src = 'https://www.fmovies.gd/home'; }
-    else if (page === 'chat') { $('chatPage').classList.add('active'); $('chatLink').classList.add('active'); }
-    else if (page === 'partners') { $('partnersPage').classList.add('active'); $('partnersLink').classList.add('active'); }
-    else if (page === 'settings') { $('settingsPage').classList.add('active'); }
   }
 
   $('homeLink').onclick = () => show('home');
@@ -556,10 +580,22 @@ function initNav() {
   $('creditsLink').onclick = () => $('creditsModal').classList.add('active');
   $('legalLink').onclick = () => $('legalModal').classList.add('active');
 
-  $('sidebarCloseBtn').onclick = () => { $('sidebar').classList.add('collapsed'); $('sidebarOpenBtn').classList.add('visible'); $('mainWrapper').classList.add('expanded'); };
-  $('sidebarOpenBtn').onclick = () => { $('sidebar').classList.remove('collapsed'); $('sidebarOpenBtn').classList.remove('visible'); $('mainWrapper').classList.remove('expanded'); };
+  $('sidebarCloseBtn').onclick = () => {
+    $('sidebar').classList.add('collapsed');
+    $('sidebarOpenBtn').classList.add('visible');
+    $('mainWrapper').classList.add('expanded');
+  };
+  $('sidebarOpenBtn').onclick = () => {
+    $('sidebar').classList.remove('collapsed');
+    $('sidebarOpenBtn').classList.remove('visible');
+    $('mainWrapper').classList.remove('expanded');
+  };
 
-  if (window.innerWidth <= 768) { $('sidebar').classList.add('collapsed'); $('sidebarOpenBtn').classList.add('visible'); $('mainWrapper').classList.add('expanded'); }
+  if (window.innerWidth <= 768) {
+    $('sidebar').classList.add('collapsed');
+    $('sidebarOpenBtn').classList.add('visible');
+    $('mainWrapper').classList.add('expanded');
+  }
 }
 
 function initKeys() {
@@ -570,6 +606,14 @@ function initKeys() {
     if (e.key.toLowerCase() === 'h') $('homeLink').click();
     if (e.key.toLowerCase() === 'p') triggerPanic();
   };
+}
+
+function initPointerLock() {
+  document.addEventListener('pointerlockchange', () => {
+    if ($('pointerLockHint')) {
+      $('pointerLockHint').classList.toggle('visible', !!document.pointerLockElement);
+    }
+  });
 }
 
 function initStats() {
@@ -616,5 +660,3 @@ function updateTime() {
   $('time').textContent = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true });
   $('date').textContent = now.toLocaleDateString('en-US', { weekday: 'long', month: 'short', day: 'numeric' });
 }
-
-document.addEventListener('pointerlockchange', () => $('pointerLockHint').classList.toggle('visible', !!document.pointerLockElement));
