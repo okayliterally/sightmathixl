@@ -455,16 +455,6 @@ function initSettings() {
     store.set('animations', on);
   };
 
-  // Auto-hide sidebar
-  const autoHide = store.get('autoHide') === 'true';
-  $('toggleAutoHide').classList.toggle('on', autoHide);
-  document.body.classList.toggle('auto-hide-sidebar', autoHide);
-  $('toggleAutoHide').onclick = () => {
-    const on = $('toggleAutoHide').classList.toggle('on');
-    document.body.classList.toggle('auto-hide-sidebar', on);
-    store.set('autoHide', on);
-  };
-
   // Compact mode
   const compact = store.get('compact') === 'true';
   $('toggleCompact').classList.toggle('on', compact);
@@ -613,6 +603,10 @@ function initGames() {
     const src = $('gamesIframe').src;
     $('gamesIframe').src = '';
     $('gamesIframe').src = src;
+  };
+
+  $('gamesHideBar').onclick = () => {
+    $('gamesHeader').style.display = 'none';
   };
 }
 
