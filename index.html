@@ -101,7 +101,7 @@
       <!-- Activities -->
       <div class="fullpage-view" id="gamesPage">
         <div class="games-menu" id="gamesMenu">
-          <h2 class="games-menu-heading">pick a game source</h2>
+          <h2 class="games-menu-heading">select a game type</h2>
           <div class="games-menu-grid">
             <div class="games-option" id="firstGamesBtn">
               <div class="games-option-icon"><i class="fas fa-gamepad"></i></div>
@@ -114,15 +114,30 @@
               <div class="games-option-icon"><i class="fas fa-fire"></i></div>
               <div class="games-option-info">
                 <h3 class="games-option-title">Games 2</h3>
-                <p class="games-option-desc">iconic games</p>
+                <p class="games-option-desc">NativeLite</p>
                 <span class="recommended-badge">RECOMMENDED</span>
               </div>
             </div>
             <div class="games-option" id="thirdGamesBtn">
               <div class="games-option-icon"><i class="fas fa-bolt"></i></div>
               <div class="games-option-info">
-                <h3 class="games-option-title">Games 3</h3>
+                <h3 class="games-option-title">gn-math games</h3>
                 <p class="games-option-desc">by gn math</p>
+                <span class="recommended-badge">RECOMMENDED</span>
+              </div>
+            </div>
+            <div class="games-option" id="salmonGamesBtn">
+              <div class="games-option-icon"><i class="fas fa-fish"></i></div>
+              <div class="games-option-info">
+                <h3 class="games-option-title">Salmon Games</h3>
+                <p class="games-option-desc">another backup</p>
+              </div>
+            </div>
+            <div class="games-option" id="ixlGamesBtn">
+              <div class="games-option-icon"><i class="fas fa-graduation-cap"></i></div>
+              <div class="games-option-info">
+                <h3 class="games-option-title">Games 3</h3>
+                <p class="games-option-desc">ixl learning</p>
               </div>
             </div>
           </div>
@@ -216,6 +231,11 @@
               <h3 class="partner-name">Partner Form</h3>
               <p class="partner-desc">want to partner? fill this out</p>
             </article>
+            <article class="partner-card" onclick="window.open('https://eggy-car-play.com/category/running-games', '_blank')">
+              <div class="partner-logo-wrap"><img src="https://image2url.com/r2/default/images/1774998975039-68b9c9be-245f-4b93-a921-e20460a836df.jpg" alt="Eggy Car"></div>
+              <h3 class="partner-name">Eggy Car</h3>
+              <p class="partner-desc">running games n more</p>
+            </article>
             <article class="partner-card">
               <div class="partner-logo-wrap"><i class="fas fa-question"></i></div>
               <h3 class="partner-name">Your site?</h3>
@@ -287,7 +307,47 @@
               <button class="cloak-btn" data-cloak="canvas"><img src="https://canvas.instructure.com/favicon.ico" alt="">Canvas</button>
               <button class="cloak-btn" data-cloak="google"><img src="https://www.google.com/favicon.ico" alt="">Google</button>
               <button class="cloak-btn" data-cloak="drive"><img src="https://drive.google.com/favicon.ico" alt="">Drive</button>
+              <button class="cloak-btn" data-cloak="docs"><img src="https://docs.google.com/favicon.ico" alt="">Docs</button>
+              <button class="cloak-btn" data-cloak="slides"><img src="https://slides.google.com/favicon.ico" alt="">Slides</button>
+              <button class="cloak-btn" data-cloak="classroom"><img src="https://classroom.google.com/favicon.ico" alt="">Classroom</button>
+              <button class="cloak-btn" data-cloak="youtube"><img src="https://www.youtube.com/favicon.ico" alt="">YouTube</button>
             </div>
+          </div>
+
+          <!-- Appearance -->
+          <div class="settings-section">
+            <h3 class="settings-section-title"><i class="fas fa-wand-magic-sparkles"></i> Appearance</h3>
+            <div class="toggle-row">
+              <span class="toggle-text">Animations <small>Smooth transitions & effects</small></span>
+              <button class="toggle-switch on" id="toggleAnimations"></button>
+            </div>
+            <div class="toggle-row">
+              <span class="toggle-text">Auto-hide Sidebar <small>Hide sidebar on game pages</small></span>
+              <button class="toggle-switch" id="toggleAutoHide"></button>
+            </div>
+            <div class="toggle-row">
+              <span class="toggle-text">Compact Mode <small>Smaller cards & tighter spacing</small></span>
+              <button class="toggle-switch" id="toggleCompact"></button>
+            </div>
+          </div>
+
+          <!-- Privacy -->
+          <div class="settings-section">
+            <h3 class="settings-section-title"><i class="fas fa-user-shield"></i> Privacy</h3>
+            <div class="toggle-row">
+              <span class="toggle-text">Clear History <small>Remove browsing data on close</small></span>
+              <button class="toggle-switch" id="toggleClearHistory"></button>
+            </div>
+            <div class="toggle-row">
+              <span class="toggle-text">Stealth Mode <small>Block analytics & tracking</small></span>
+              <button class="toggle-switch" id="toggleStealth"></button>
+            </div>
+          </div>
+
+          <!-- Reset -->
+          <div class="settings-section">
+            <h3 class="settings-section-title"><i class="fas fa-trash-can"></i> Reset</h3>
+            <button class="settings-reset-btn" id="resetAllBtn">Reset All Settings</button>
           </div>
         </div>
       </div>
