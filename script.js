@@ -493,6 +493,15 @@ function initGames() {
     $('gamesBack').style.display = 'flex';
   };
 
+  $('thirdGamesBtn').onclick = () => {
+    $('gamesMenu').style.display = 'none';
+    $('gamesHeader').style.display = 'flex';
+    $('gamesIframeContainer').style.display = 'block';
+    $('gamesBack').style.display = 'flex';
+    $('gamesReload').style.display = 'flex';
+    $('gamesIframe').src = 'https://gn-math.github.io/';
+  };
+
   $('gamePlayerBack').onclick = () => {
     $('gamePlayerView').classList.remove('active');
     $('gamePlayerIframe').src = '';
