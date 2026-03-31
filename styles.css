@@ -712,8 +712,8 @@ a:hover {
 .games-menu-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
-  max-width: 720px;
+  gap: 20px;
+  max-width: 780px;
   width: 100%;
   z-index: 1;
 }
@@ -765,7 +765,8 @@ a:hover {
 }
 
 .games-option-desc {
-  font-size: 13px;
+  font-size: 16px;
+  font-weight: 600;
   color: var(--muted);
 }
 
@@ -1598,9 +1599,97 @@ a:hover {
   .games-option {
     padding: 24px 20px;
   }
+  .games-option-desc {
+    font-size: 14px;
+  }
   .kbd-hint {
     display: none;
   }
+}
+
+.partner-logo-wrap img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.settings-reset-btn {
+  width: 100%;
+  padding: 14px;
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  border-radius: 12px;
+  color: var(--danger);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.2s ease;
+}
+
+.settings-reset-btn:hover {
+  background: rgba(239, 68, 68, 0.2);
+  border-color: rgba(239, 68, 68, 0.4);
+  transform: scale(1.01);
+}
+
+.no-animations *,
+.no-animations *::before,
+.no-animations *::after {
+  animation-duration: 0s !important;
+  transition-duration: 0s !important;
+}
+
+.auto-hide-sidebar .sidebar {
+  transform: translateX(-100%);
+  opacity: 0;
+}
+
+.auto-hide-sidebar .main-wrapper {
+  margin-left: 0;
+}
+
+.compact-mode .games-menu-grid {
+  gap: 12px;
+  max-width: 600px;
+}
+
+.compact-mode .games-option {
+  padding: 20px 16px;
+  border-radius: 16px;
+}
+
+.compact-mode .games-option-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  margin-bottom: 10px;
+}
+
+.compact-mode .games-option-icon i {
+  font-size: 22px;
+}
+
+.compact-mode .games-option-title {
+  font-size: 15px;
+}
+
+.compact-mode .games-option-desc {
+  font-size: 13px;
+}
+
+.compact-mode .second-games-grid {
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 10px;
+}
+
+.compact-mode .game-card {
+  padding: 8px;
+}
+
+.stealth-mode .loading-screen {
+  display: none !important;
 }
 
 ::-webkit-scrollbar {
