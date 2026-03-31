@@ -499,7 +499,7 @@ function initGames() {
     $('gamesIframeContainer').style.display = 'block';
     $('gamesBack').style.display = 'flex';
     $('gamesReload').style.display = 'flex';
-    $('gamesIframe').src = 'https://gn-math.github.io/';
+    $('gamesIframe').src = 'https://okayliterally.github.io/ixllearning/';
   };
 
   $('gamePlayerBack').onclick = () => {
