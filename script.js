@@ -312,7 +312,6 @@ const cloakConfig = {
   docs: { title: 'Google Docs', favicon: 'https://docs.google.com/favicon.ico' },
   slides: { title: 'Google Slides', favicon: 'https://slides.google.com/favicon.ico' },
   classroom: { title: 'Google Classroom', favicon: 'https://classroom.google.com/favicon.ico' },
-  youtube: { title: 'YouTube', favicon: 'https://www.youtube.com/favicon.ico' }
 };
 
 let currentGameUrl = '';
@@ -542,24 +541,6 @@ function initGames() {
   };
 
   $('thirdGamesBtn').onclick = () => {
-    $('gamesMenu').style.display = 'none';
-    $('gamesHeader').style.display = 'flex';
-    $('gamesIframeContainer').style.display = 'block';
-    $('gamesBack').style.display = 'flex';
-    $('gamesReload').style.display = 'flex';
-    $('gamesIframe').src = 'https://gn-math.github.io/';
-  };
-
-  $('salmonGamesBtn').onclick = () => {
-    $('gamesMenu').style.display = 'none';
-    $('gamesHeader').style.display = 'flex';
-    $('gamesIframeContainer').style.display = 'block';
-    $('gamesBack').style.display = 'flex';
-    $('gamesReload').style.display = 'flex';
-    $('gamesIframe').src = 'https://salmon-games.pages.dev/';
-  };
-
-  $('ixlGamesBtn').onclick = () => {
     $('gamesMenu').style.display = 'none';
     $('gamesHeader').style.display = 'flex';
     $('gamesIframeContainer').style.display = 'block';
