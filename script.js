@@ -308,7 +308,11 @@ const cloakConfig = {
   default: { title: 'sight.w', favicon: 'https://image2url.com/r2/default/images/1772114193046-733bfa71-77a7-4fdc-bce4-d3e8ebe17a29.png' },
   canvas: { title: 'Canvas LMS', favicon: 'https://canvas.instructure.com/favicon.ico' },
   google: { title: 'Google', favicon: 'https://www.google.com/favicon.ico' },
-  drive: { title: 'Google Drive', favicon: 'https://drive.google.com/favicon.ico' }
+  drive: { title: 'Google Drive', favicon: 'https://drive.google.com/favicon.ico' },
+  docs: { title: 'Google Docs', favicon: 'https://docs.google.com/favicon.ico' },
+  slides: { title: 'Google Slides', favicon: 'https://slides.google.com/favicon.ico' },
+  classroom: { title: 'Google Classroom', favicon: 'https://classroom.google.com/favicon.ico' },
+  youtube: { title: 'YouTube', favicon: 'https://www.youtube.com/favicon.ico' }
 };
 
 let currentGameUrl = '';
@@ -441,6 +445,60 @@ function initSettings() {
     document.addEventListener('keydown', handler);
   };
 
+  // Animations
+  const anims = store.get('animations') !== 'false';
+  $('toggleAnimations').classList.toggle('on', anims);
+  document.body.classList.toggle('no-animations', !anims);
+  $('toggleAnimations').onclick = () => {
+    const on = $('toggleAnimations').classList.toggle('on');
+    document.body.classList.toggle('no-animations', !on);
+    store.set('animations', on);
+  };
+
+  // Auto-hide sidebar
+  const autoHide = store.get('autoHide') === 'true';
+  $('toggleAutoHide').classList.toggle('on', autoHide);
+  document.body.classList.toggle('auto-hide-sidebar', autoHide);
+  $('toggleAutoHide').onclick = () => {
+    const on = $('toggleAutoHide').classList.toggle('on');
+    document.body.classList.toggle('auto-hide-sidebar', on);
+    store.set('autoHide', on);
+  };
+
+  // Compact mode
+  const compact = store.get('compact') === 'true';
+  $('toggleCompact').classList.toggle('on', compact);
+  document.body.classList.toggle('compact-mode', compact);
+  $('toggleCompact').onclick = () => {
+    const on = $('toggleCompact').classList.toggle('on');
+    document.body.classList.toggle('compact-mode', on);
+    store.set('compact', on);
+  };
+
+  // Clear history
+  $('toggleClearHistory').onclick = () => {
+    const on = $('toggleClearHistory').classList.toggle('on');
+    store.set('clearHistory', on);
+  };
+
+  // Stealth mode
+  const stealth = store.get('stealth') === 'true';
+  $('toggleStealth').classList.toggle('on', stealth);
+  document.body.classList.toggle('stealth-mode', stealth);
+  $('toggleStealth').onclick = () => {
+    const on = $('toggleStealth').classList.toggle('on');
+    document.body.classList.toggle('stealth-mode', on);
+    store.set('stealth', on);
+  };
+
+  // Reset all
+  $('resetAllBtn').onclick = () => {
+ if (confirm('Reset all settings?')) {
+      localStorage.clear();
+      location.reload();
+    }
+  };
+
   // Modals
   $('embedClose').onclick = () => $('embedModal').classList.remove('active');
   $('creditsClose').onclick = () => $('creditsModal').classList.remove('active');
@@ -494,6 +552,24 @@ function initGames() {
   };
 
   $('thirdGamesBtn').onclick = () => {
+    $('gamesMenu').style.display = 'none';
+    $('gamesHeader').style.display = 'flex';
+    $('gamesIframeContainer').style.display = 'block';
+    $('gamesBack').style.display = 'flex';
+    $('gamesReload').style.display = 'flex';
+    $('gamesIframe').src = 'https://gn-math.github.io/';
+  };
+
+  $('salmonGamesBtn').onclick = () => {
+    $('gamesMenu').style.display = 'none';
+    $('gamesHeader').style.display = 'flex';
+    $('gamesIframeContainer').style.display = 'block';
+    $('gamesBack').style.display = 'flex';
+    $('gamesReload').style.display = 'flex';
+    $('gamesIframe').src = 'https://salmon-games.pages.dev/';
+  };
+
+  $('ixlGamesBtn').onclick = () => {
     $('gamesMenu').style.display = 'none';
     $('gamesHeader').style.display = 'flex';
     $('gamesIframeContainer').style.display = 'block';
