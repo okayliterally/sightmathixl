@@ -339,7 +339,20 @@ function initTheme() {
       document.body.setAttribute('data-theme', btn.dataset.theme);
       store.set('theme', btn.dataset.theme);
       updateThemeBtns(btn.dataset.theme);
+      const iframe = $('gamesIframe');
+      if (iframe && iframe.contentWindow) {
+        try {
+          iframe.contentWindow.postMessage({ type: 'theme', theme: btn.dataset.theme }, '*');
+        } catch(e) {}
+      }
     });
+  });
+
+  // sync theme to iframe after it loads
+  $('gamesIframe').addEventListener('load', () => {
+    try {
+      $('gamesIframe').contentWindow.postMessage({ type: 'theme', theme: document.body.getAttribute('data-theme') || 'dark' }, '*');
+    } catch(e) {}
   });
 }
 
