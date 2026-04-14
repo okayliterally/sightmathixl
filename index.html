@@ -100,19 +100,32 @@
 
       <!-- Activities -->
       <div class="fullpage-view" id="gamesPage">
-        <header class="fullpage-header" id="gamesHeader">
-          <h2 class="fullpage-title"><i class="fas fa-gamepad"></i> Activities</h2>
-          <div class="fullpage-btns">
-            <button class="fullpage-btn games-tab-btn active" id="salmonTabBtn"><i class="fas fa-gamepad"></i> Games</button>
-            <button class="fullpage-btn games-tab-btn" id="gnmathTabBtn"><i class="fas fa-bolt"></i> gn-math</button>
-            <button class="fullpage-btn" id="gamesReload"><i class="fas fa-rotate-right"></i> Reload</button>
-            <button class="fullpage-btn" id="gamesHideBar"><i class="fas fa-eye-slash"></i> Hide</button>
-            <button class="fullpage-btn home-btn" id="gamesHome"><i class="fas fa-house"></i> Home</button>
+        <!-- Games Grid -->
+        <div class="games-grid-view" id="gamesGridView">
+          <div class="games-grid-header">
+            <input type="text" class="games-grid-search" id="gamesSearchInput" placeholder="Search games...">
           </div>
-        </header>
+          <div class="games-grid" id="gamesGrid"></div>
+        </div>
 
-        <div class="fullpage-body" id="gamesIframeContainer">
-          <iframe class="fullpage-iframe" id="gamesIframe" title="Games" allow="fullscreen *; gamepad *;" allowfullscreen sandbox="allow-scripts allow-same-origin allow-forms allow-pointer-lock"></iframe>
+        <!-- Game Player -->
+        <div class="game-player-view" id="gamePlayerView">
+          <header class="game-player-header">
+            <h2 class="game-player-title"><i class="fas fa-gamepad"></i> <span id="gamePlayerTitle">Game</span></h2>
+            <div class="game-player-btns">
+              <button class="fullpage-btn" id="gamePlayerReload"><i class="fas fa-rotate-right"></i> Reload</button>
+              <button class="fullpage-btn accent-btn" id="gamePlayerEmbed"><i class="fas fa-code"></i> Embed</button>
+              <button class="fullpage-btn" id="gamePlayerBack"><i class="fas fa-arrow-left"></i> Back</button>
+            </div>
+          </header>
+          <div class="game-player-body">
+            <div class="game-player-loading" id="gamePlayerLoading">
+              <i class="fas fa-circle-notch"></i>
+              <span>Loading the game...</span>
+            </div>
+            <div class="pointer-lock-hint" id="pointerLockHint">Click game to lock mouse | Press ESC to release</div>
+            <iframe class="game-player-iframe" id="gamePlayerIframe" title="Game" allow="fullscreen *; gamepad *; clipboard-write *; pointer-lock *;" allowfullscreen></iframe>
+          </div>
         </div>
       </div>
 
@@ -183,7 +196,6 @@
             <h2 class="settings-title">Settings</h2>
           </div>
 
-          <!-- Theme -->
           <div class="settings-section">
             <h3 class="settings-section-title"><i class="fas fa-palette"></i> Theme</h3>
             <div class="theme-grid">
@@ -197,7 +209,6 @@
             </div>
           </div>
 
-          <!-- Performance -->
           <div class="settings-section">
             <h3 class="settings-section-title"><i class="fas fa-gauge-high"></i> Performance</h3>
             <div class="toggle-row">
@@ -214,7 +225,6 @@
             </div>
           </div>
 
-          <!-- Bypass -->
           <div class="settings-section">
             <h3 class="settings-section-title"><i class="fas fa-shield-halved"></i> Bypass</h3>
             <div class="bypass-grid">
@@ -229,7 +239,6 @@
             </div>
           </div>
 
-          <!-- Tab Cloak -->
           <div class="settings-section">
             <h3 class="settings-section-title"><i class="fas fa-mask"></i> Tab Cloak</h3>
             <div class="cloak-grid">
@@ -243,7 +252,6 @@
             </div>
           </div>
 
-          <!-- Appearance -->
           <div class="settings-section">
             <h3 class="settings-section-title"><i class="fas fa-wand-magic-sparkles"></i> Appearance</h3>
             <div class="toggle-row">
@@ -256,7 +264,6 @@
             </div>
           </div>
 
-          <!-- Privacy -->
           <div class="settings-section">
             <h3 class="settings-section-title"><i class="fas fa-user-shield"></i> Privacy</h3>
             <div class="toggle-row">
@@ -269,7 +276,6 @@
             </div>
           </div>
 
-          <!-- Reset -->
           <div class="settings-section">
             <h3 class="settings-section-title"><i class="fas fa-trash-can"></i> Reset</h3>
             <button class="settings-reset-btn" id="resetAllBtn">Reset All Settings</button>
@@ -279,7 +285,7 @@
     </div>
   </div>
 
-  <!-- Embed Modal (kept for compatibility) -->
+  <!-- Embed Modal -->
   <div class="modal-overlay" id="embedModal">
     <div class="modal">
       <header class="modal-header">
@@ -303,13 +309,8 @@
       <div class="modal-body">
         <div class="credits-block">
           <div class="credits-label">Games</div>
-          <div class="credits-item-title">SALMON</div>
-          <div class="credits-item-note">SALMON games library</div>
-        </div>
-        <div class="credits-block">
-          <div class="credits-label">gn-math</div>
-          <div class="credits-item-title">gn-math</div>
-          <div class="credits-item-note">from <a href="https://gn-math.github.io/" target="_blank" rel="noopener noreferrer">gn-math.github.io</a></div>
+          <div class="credits-item-title">NativeLite</div>
+          <div class="credits-item-note">from <a href="https://github.com/parcoillegacy/nativelite" target="_blank" rel="noopener noreferrer">parcoillegacy/nativelite</a></div>
         </div>
         <div class="credits-block">
           <div class="credits-label">Thanks</div>
